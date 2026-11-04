@@ -27,6 +27,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
     'Tiền Thưởng (VNĐ)',
     'Tiền Tip (VNĐ)',
     'TỔNG DOANH THU (VNĐ)',
+    'Thuế & Phí Sàn (VNĐ)',
+    'Sau Thuế/Phí (VNĐ)',
     'Tiền Xăng (VNĐ)',
     'Tiền Ăn Uống (VNĐ)',
     'Bảo Dưỡng/Sửa Xe (VNĐ)',
@@ -47,6 +49,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
   let sumBonus = 0;
   let sumTips = 0;
   let sumGross = 0;
+  let sumTaxAndFees = 0;
+  let sumRevAfterTax = 0;
   let sumPetrol = 0;
   let sumMeals = 0;
   let sumMaint = 0;
@@ -79,6 +83,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
     sumBonus += bonus;
     sumTips += tips;
     sumGross += calc.grossRevenue;
+    sumTaxAndFees += calc.totalTaxAndFees;
+    sumRevAfterTax += calc.revenueAfterTax;
     sumPetrol += petrol;
     sumMeals += meals;
     sumMaint += maint;
@@ -109,6 +115,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
       bonus,
       tips,
       calc.grossRevenue,
+      calc.totalTaxAndFees,
+      calc.revenueAfterTax,
       petrol,
       meals,
       maint,
@@ -136,6 +144,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
     sumBonus,
     sumTips,
     sumGross,
+    sumTaxAndFees,
+    sumRevAfterTax,
     sumPetrol,
     sumMeals,
     sumMaint,
@@ -166,6 +176,8 @@ export function exportToExcel(records: ShiftRecord[], filenamePrefix = 'Bao_Cao_
     { wch: 16 }, // Thưởng
     { wch: 14 }, // Tip
     { wch: 22 }, // Tổng Doanh Thu
+    { wch: 20 }, // Thuế & Phí Sàn
+    { wch: 20 }, // Sau Thuế/Phí
     { wch: 15 }, // Xăng
     { wch: 16 }, // Cơm nước
     { wch: 22 }, // Bảo Dưỡng

@@ -1,7 +1,7 @@
 import { ShiftRecord, ShiftCalculated } from '../types';
 
 /**
- * Tính toán các chỉ số cho một bản ghi ca chạy
+ * Tính toán các chỉ số cho một bản ghi ca chạy (Bao gồm Thuế TNCN/VAT & Chiết khấu sàn)
  */
 export function calculateShift(record: ShiftRecord): ShiftCalculated {
   const { revenue, expenses, workInfo, savings } = record;
@@ -12,7 +12,13 @@ export function calculateShift(record: ShiftRecord): ShiftCalculated {
   const tips = Number(revenue?.tips) || 0;
   const grossRevenue = appFare + bonus + tips;
 
-  // [2] Tổng chi phí: Tiền xăng + Ăn uống + Bảo dưỡng + Các khoản chi đột xuất
+  // Khấu trừ Thuế & Phí sàn
+  const taxAmount = Number(revenue?.taxAmount) || 0;
+  const platformFee = Number(revenue?.platformFee) || 0;
+  const totalTaxAndFees = taxAmount + platformFee;
+  const revenueAfterTax = Math.max(0, grossRevenue - totalTaxAndFees);
+
+  // [2] Tổng chi phí vận hành: Tiền xăng + Ăn uống + Bảo dưỡng + Các khoản chi đột xuất
   const petrol = Number(expenses?.petrol) || 0;
   const maintenance = Number(expenses?.maintenance) || 0;
   const meals = Number(expenses?.meals) || 0;
@@ -23,8 +29,8 @@ export function calculateShift(record: ShiftRecord): ShiftCalculated {
 
   const totalExpenses = petrol + maintenance + meals + totalOtherExpenses;
 
-  // [3] Thu nhập ròng (Lãi thực nhận đút túi): [1] - [2]
-  const netIncome = grossRevenue - totalExpenses;
+  // [3] Thu nhập ròng (Lãi thực nhận đút túi) = Doanh thu sau thuế/phí - Tổng chi phí
+  const netIncome = revenueAfterTax - totalExpenses;
 
   // [4] Tiền tiết kiệm tích lũy / trích quỹ
   const savingAmount = Number(savings) || 0;
@@ -46,6 +52,10 @@ export function calculateShift(record: ShiftRecord): ShiftCalculated {
 
   return {
     grossRevenue,
+    taxAmount,
+    platformFee,
+    totalTaxAndFees,
+    revenueAfterTax,
     totalOtherExpenses,
     totalExpenses,
     netIncome,
@@ -62,6 +72,9 @@ export function calculateShift(record: ShiftRecord): ShiftCalculated {
 
 export interface SummaryAggregated {
   totalGrossRevenue: number;
+  totalTaxAmount: number;
+  totalPlatformFee: number;
+  totalRevenueAfterTax: number;
   totalExpenses: number;
   totalNetIncome: number;
   totalSavings: number;
@@ -89,6 +102,9 @@ export interface SummaryAggregated {
  */
 export function aggregateRecords(records: ShiftRecord[]): SummaryAggregated {
   let totalGrossRevenue = 0;
+  let totalTaxAmount = 0;
+  let totalPlatformFee = 0;
+  let totalRevenueAfterTax = 0;
   let totalExpenses = 0;
   let totalNetIncome = 0;
   let totalSavings = 0;
@@ -105,6 +121,9 @@ export function aggregateRecords(records: ShiftRecord[]): SummaryAggregated {
   records.forEach((record) => {
     const calc = calculateShift(record);
     totalGrossRevenue += calc.grossRevenue;
+    totalTaxAmount += calc.taxAmount;
+    totalPlatformFee += calc.platformFee;
+    totalRevenueAfterTax += calc.revenueAfterTax;
     totalExpenses += calc.totalExpenses;
     totalNetIncome += calc.netIncome;
     totalSavings += calc.savings;
@@ -130,6 +149,9 @@ export function aggregateRecords(records: ShiftRecord[]): SummaryAggregated {
 
   return {
     totalGrossRevenue,
+    totalTaxAmount,
+    totalPlatformFee,
+    totalRevenueAfterTax,
     totalExpenses,
     totalNetIncome,
     totalSavings,

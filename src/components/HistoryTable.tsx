@@ -256,6 +256,24 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
                                   <span>Tip:</span>
                                   <span className="font-semibold">{formatCurrency(record.revenue?.tips || 0)}</span>
                                 </div>
+                                {calc.taxAmount > 0 && (
+                                  <div className="flex justify-between text-blue-600 dark:text-blue-400">
+                                    <span>Thuế TNCN/VAT:</span>
+                                    <span className="font-bold">-{formatCurrency(calc.taxAmount)}</span>
+                                  </div>
+                                )}
+                                {calc.platformFee > 0 && (
+                                  <div className="flex justify-between text-blue-600 dark:text-blue-400">
+                                    <span>Chiết khấu sàn:</span>
+                                    <span className="font-bold">-{formatCurrency(calc.platformFee)}</span>
+                                  </div>
+                                )}
+                                {calc.totalTaxAndFees > 0 && (
+                                  <div className="flex justify-between border-t border-slate-100 dark:border-slate-700 pt-1 text-emerald-700 dark:text-emerald-300 font-bold">
+                                    <span>Sau thuế/phí:</span>
+                                    <span>{formatCurrency(calc.revenueAfterTax)}</span>
+                                  </div>
+                                )}
                               </div>
 
                               <div className="p-3 bg-white dark:bg-slate-800 rounded-xl border border-slate-200/60 dark:border-slate-700 space-y-1">
@@ -450,6 +468,18 @@ export const HistoryTable: React.FC<HistoryTableProps> = ({
                           {formatCurrency((record.revenue?.bonus || 0) + (record.revenue?.tips || 0))}
                         </span>
                       </div>
+                      {calc.taxAmount > 0 && (
+                        <div className="flex justify-between text-blue-600 dark:text-blue-400">
+                          <span className="text-slate-400">Thuế TNCN/VAT:</span>
+                          <span className="font-bold">-{formatCurrency(calc.taxAmount)}</span>
+                        </div>
+                      )}
+                      {calc.platformFee > 0 && (
+                        <div className="flex justify-between text-blue-600 dark:text-blue-400">
+                          <span className="text-slate-400">Chiết khấu sàn:</span>
+                          <span className="font-bold">-{formatCurrency(calc.platformFee)}</span>
+                        </div>
+                      )}
                       <div className="flex justify-between">
                         <span className="text-slate-400">Tiền xăng:</span>
                         <span className="font-semibold text-rose-500">{formatCurrency(record.expenses?.petrol || 0)}</span>
