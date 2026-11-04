@@ -1,72 +1,112 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="100%" height="auto">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" width="100%" height="auto">
   <defs>
     <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#064e3b" />
-      <stop offset="50%" stop-color="#008239" />
+      <stop offset="45%" stop-color="#008239" />
       <stop offset="100%" stop-color="#00B14F" />
     </linearGradient>
     <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.15" />
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14" />
       <stop offset="100%" stop-color="#ffffff" stop-opacity="0.05" />
     </linearGradient>
     <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000000" flood-opacity="0.25" />
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#000000" flood-opacity="0.25" />
     </filter>
   </defs>
 
-  <!-- Background -->
-  <rect width="1200" height="400" rx="20" fill="url(#bgGrad)" />
+  <style>
+    .font-heavy { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 900; }
+    .font-bold { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 700; }
+    .font-medium { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 500; }
+    .font-regular { font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; font-weight: 400; }
+  </style>
 
-  <!-- Decorative circles -->
-  <circle cx="1100" cy="80" r="180" fill="#ffffff" fill-opacity="0.04" />
-  <circle cx="950" cy="320" r="140" fill="#ffffff" fill-opacity="0.03" />
+  <!-- Background Canvas -->
+  <rect width="1200" height="420" rx="24" fill="url(#bgGrad)" />
 
-  <!-- App Icon Badge -->
-  <g transform="translate(80, 85)">
-    <rect width="100" height="100" rx="24" fill="#ffffff" filter="url(#shadow)" />
-    <text x="50" y="65" font-size="54" text-anchor="middle" dominant-baseline="central">🛵</text>
+  <!-- Ambient Glow & Shapes -->
+  <circle cx="1120" cy="70" r="190" fill="#ffffff" fill-opacity="0.04" />
+  <circle cx="980" cy="360" r="160" fill="#ffffff" fill-opacity="0.03" />
+  <circle cx="60" cy="380" r="100" fill="#ffffff" fill-opacity="0.03" />
+
+  <!-- Logo App Icon -->
+  <g transform="translate(70, 75)">
+    <rect width="92" height="92" rx="24" fill="#ffffff" filter="url(#shadow)" />
+    <text x="46" y="60" font-size="52" text-anchor="middle" dominant-baseline="central">🛵</text>
   </g>
 
-  <!-- Title & Subtitles -->
-  <text x="210" y="130" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="44" font-weight="900" fill="#ffffff">
+  <!-- Title & Subtitle -->
+  <text x="185" y="118" class="font-heavy" font-size="44" fill="#ffffff">
     PhongDriver <tspan fill="#6ee7b7">Pay</tspan>
   </text>
-  <text x="210" y="168" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="500" fill="#d1fae5">
+  <text x="185" y="156" class="font-medium" font-size="18" fill="#d1fae5">
     Ứng Dụng Quản Lý Doanh Thu, Chi Phí &amp; Tiết Kiệm Dành Cho Tài Xế Grab
   </text>
 
-  <!-- Feature Cards Grid -->
-  <g transform="translate(80, 230)">
-    <!-- Card 1 -->
+  <!-- 4 Feature Cards Grid -->
+  <g transform="translate(70, 220)">
+    <!-- Card 1: Lịch Âm Dương -->
     <g transform="translate(0, 0)">
-      <rect width="240" height="100" rx="16" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1.5" />
-      <text x="25" y="42" font-size="22">🌕</text>
-      <text x="60" y="42" font-family="sans-serif" font-size="16" font-weight="700" fill="#ffffff">Lịch Âm Dương</text>
-      <text x="25" y="72" font-family="sans-serif" font-size="13" fill="#a7f3d0">Tự tính Mùng 1, Hôm Rằm, Lễ Tết theo chuẩn UTC+7</text>
+      <rect width="250" height="150" rx="18" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.2" />
+      <text x="24" y="44" font-size="24">🌕</text>
+      <text x="62" y="44" class="font-bold" font-size="16" fill="#ffffff">Lịch Âm Dương</text>
+      <text x="24" y="80" class="font-medium" font-size="13" fill="#a7f3d0">
+        • Tự tính Mùng 1 &amp; Hôm Rằm
+      </text>
+      <text x="24" y="104" class="font-regular" font-size="13" fill="#d1fae5">
+        • Nhắc ngày Lễ, Tết truyền thống
+      </text>
+      <text x="24" y="128" class="font-regular" font-size="12" fill="#6ee7b7">
+        Chuẩn thiên văn Việt Nam UTC+7
+      </text>
     </g>
 
-    <!-- Card 2 -->
-    <g transform="translate(265, 0)">
-      <rect width="240" height="100" rx="16" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1.5" />
-      <text x="25" y="42" font-size="22">💰</text>
-      <text x="60" y="42" font-family="sans-serif" font-size="16" font-weight="700" fill="#ffffff">5 Chỉ Số Cốt Lõi</text>
-      <text x="25" y="72" font-family="sans-serif" font-size="13" fill="#a7f3d0">Thu gộp, Tổng chi, Lãi đút túi, Quỹ tiết kiệm, Tiền mặt</text>
+    <!-- Card 2: 5 Chỉ Số Cốt Lõi & Thuế -->
+    <g transform="translate(270, 0)">
+      <rect width="250" height="150" rx="18" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.2" />
+      <text x="24" y="44" font-size="24">💰</text>
+      <text x="62" y="44" class="font-bold" font-size="16" fill="#ffffff">5 Chỉ Số Cốt Lõi</text>
+      <text x="24" y="80" class="font-medium" font-size="13" fill="#a7f3d0">
+        • Thu gộp - Chi phí = Lãi đút túi
+      </text>
+      <text x="24" y="104" class="font-regular" font-size="13" fill="#d1fae5">
+        • Khấu trừ thuế TNCN 1.5% rõ ràng
+      </text>
+      <text x="24" y="128" class="font-regular" font-size="12" fill="#6ee7b7">
+        Trích quỹ tiết kiệm tự động
+      </text>
     </g>
 
-    <!-- Card 3 -->
-    <g transform="translate(530, 0)">
-      <rect width="240" height="100" rx="16" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1.5" />
-      <text x="25" y="42" font-size="22">📊</text>
-      <text x="60" y="42" font-family="sans-serif" font-size="16" font-weight="700" fill="#ffffff">Xuất File Excel</text>
-      <text x="25" y="72" font-family="sans-serif" font-size="13" fill="#a7f3d0">Xuất bảng chấm công .xlsx &amp; sao lưu JSON an toàn</text>
+    <!-- Card 3: Xuất File Excel -->
+    <g transform="translate(540, 0)">
+      <rect width="250" height="150" rx="18" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.2" />
+      <text x="24" y="44" font-size="24">📊</text>
+      <text x="62" y="44" class="font-bold" font-size="16" fill="#ffffff">Xuất File Excel</text>
+      <text x="24" y="80" class="font-medium" font-size="13" fill="#a7f3d0">
+        • Báo cáo bảng công .xlsx chuẩn
+      </text>
+      <text x="24" y="104" class="font-regular" font-size="13" fill="#d1fae5">
+        • Sao lưu JSON khôi phục đổi máy
+      </text>
+      <text x="24" y="128" class="font-regular" font-size="12" fill="#6ee7b7">
+        Dữ liệu lưu an toàn trên máy
+      </text>
     </g>
 
-    <!-- Card 4 -->
-    <g transform="translate(795, 0)">
-      <rect width="240" height="100" rx="16" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.2" stroke-width="1.5" />
-      <text x="25" y="42" font-size="22">📱</text>
-      <text x="60" y="42" font-family="sans-serif" font-size="16" font-weight="700" fill="#ffffff">PWA Mobile-First</text>
-      <text x="25" y="72" font-family="sans-serif" font-size="13" fill="#a7f3d0">Cài đặt trực tiếp lên điện thoại, dùng offline siêu mượt</text>
+    <!-- Card 4: PWA Mobile-First -->
+    <g transform="translate(810, 0)">
+      <rect width="250" height="150" rx="18" fill="url(#cardGrad)" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.2" />
+      <text x="24" y="44" font-size="24">📱</text>
+      <text x="62" y="44" class="font-bold" font-size="16" fill="#ffffff">PWA Mobile-First</text>
+      <text x="24" y="80" class="font-medium" font-size="13" fill="#a7f3d0">
+        • Cài đặt thẳng vào màn hình ĐT
+      </text>
+      <text x="24" y="104" class="font-regular" font-size="13" fill="#d1fae5">
+        • Nút bấm to, thao tác 1 tay
+      </text>
+      <text x="24" y="128" class="font-regular" font-size="12" fill="#6ee7b7">
+        Dùng mượt mà cả khi mất mạng
+      </text>
     </g>
   </g>
 </svg>
