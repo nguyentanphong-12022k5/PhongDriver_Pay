@@ -1,4 +1,4 @@
-import { LunarDateInfo } from '../types';
+import { LunarDateInfo } from '../types/index';
 
 /**
  * Thuật toán tính Âm lịch Việt Nam dựa trên công trình của TS. Hồ Ngọc Đức (Múi giờ UTC+7).
@@ -118,9 +118,10 @@ export function convertSolar2Lunar(dd: number, mm: number, yy: number, timeZone 
   let b11 = a11;
   let lunarYear = yy;
   if (a11 >= monthStart) {
-    lunarYear = yy - 1;
+    lunarYear = yy;
     a11 = getLunarMonth11(yy - 1, timeZone);
   } else {
+    lunarYear = yy + 1;
     b11 = getLunarMonth11(yy + 1, timeZone);
   }
   const lunarDay = dayNumber - monthStart + 1;

@@ -1,4 +1,4 @@
-import { ShiftRecord, AppSettings } from '../types';
+import { ShiftRecord, AppSettings } from '../types/index';
 
 const RECORDS_STORAGE_KEY = 'phongdriver_pay_records';
 const SETTINGS_STORAGE_KEY = 'phongdriver_pay_settings';

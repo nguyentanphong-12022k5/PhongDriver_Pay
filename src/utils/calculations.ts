@@ -1,4 +1,4 @@
-import { ShiftRecord, ShiftCalculated } from '../types';
+import { ShiftRecord, ShiftCalculated } from '../types/index';
 
 /**
  * Tính toán các chỉ số cho một bản ghi ca chạy (Bao gồm Thuế TNCN/VAT & Chiết khấu sàn)
