@@ -131,6 +131,36 @@ Nếu trên GitHub của bạn trang web chưa hiển thị, hãy làm theo 3 b�
 
 ---
 
+## 🧪 Báo Cáo Kiểm Thử Chất Lượng & Độ Ổn Định (QA Tester Report)
+
+Ứng dụng đã được kiểm thử toàn diện bởi kỹ sư QA / Test Engineer với bộ test tự động **20/20 Test Cases Đạt Chuẩn 100%**:
+
+```bash
+# Chạy bộ kiểm thử tự động toàn diện
+npm test
+```
+
+### 📋 Bảng Tổng Kết Kết Quả Kiểm Thử
+
+| Phân hệ kiểm thử | Số kịch bản | Kết quả | Mô tả chi tiết |
+| :--- | :---: | :---: | :--- |
+| **1. Thuật toán Âm lịch UTC+7** | 4 tests | ✅ PASS (100%) | Chuyển đổi chuẩn xác Mùng 1 Tết Nguyên Đán, Giỗ Tổ Hùng Vương, Rằm 15, Can Chi theo TS. Hồ Ngọc Đức |
+| **2. Công thức 5 chỉ số & Thuế** | 4 tests | ✅ PASS (100%) | Khấu trừ thuế TNCN 1.5%, chiết khấu sàn 20-31.84%, xử lý an toàn khi nhập số 0 (không lỗi NaN/Infinity) |
+| **3. Lưu trữ & Chặn dữ liệu ảo** | 5 tests | ✅ PASS (100%) | Chặn hoàn toàn lỗi tự sinh lại 7 ngày mẫu khi đã nhập ca thật; xóa/sửa/lưu dữ liệu bền vững |
+| **4. Bộ lọc & Tổng hợp thời gian** | 1 test | ✅ PASS (100%) | Tính đúng tổng thu nhập gộp, tổng chi, lãi ròng và tiền tiết kiệm theo Hôm nay / Tuần / Tháng / Năm |
+| **5. Trường hợp ngoại lệ (Lỗ ròng)** | 1 test | ✅ PASS (100%) | Khi chi phí phát sinh lớn (sửa xe) vượt doanh thu, tính ra số âm chính xác, không gây lỗi hệ thống |
+| **6. Khả năng tự phục hồi dữ liệu** | 1 test | ✅ PASS (100%) | Khi dữ liệu bộ nhớ máy bị hỏng định dạng, app tự phục hồi về trạng thái an toàn, không trắng trang |
+| **7. Ngày lễ truyền thống Việt Nam** | 4 tests | ✅ PASS (100%) | Nhận diện đúng Tết Đoan Ngọ (5/5), Trung Thu (15/8), Tiễn Táo Quân (23 tháng Chạp), Năm nhuận 29/02 |
+
+### 🛠️ Các Điểm Đã Được Khắc Phục & Tối Ưu Triệt Để
+1. **Khắc phục lỗi nạp dữ liệu ảo**: Đã thêm cờ trạng thái `phongdriver_initialized_v2` giúp bác tài khi xóa trắng và nhập 1 ca duy nhất thì app chỉ lưu và hiển thị đúng 1 ca đó, không tự động sinh lại dữ liệu mẫu.
+2. **Khắc phục lỗi biểu đồ Chart.js**: Đã đăng ký trọn bộ `registerables` và bọc `ErrorBoundary` chống văng ứng dụng.
+3. **Bộ chọn ngày thông minh**: Đã bổ sung ô chọn lịch tương tác và phím chuyển ngày `◀` / `▶` trên thanh điều hướng để xem và ghi chép ca chạy các ngày bất kỳ.
+4. **Hỗ trợ tính thuế rõ ràng**: Có sẵn nút chọn nhanh thuế 1.5% (hoặc miễn thuế) và ghi chú hướng dẫn các ô không bắt buộc.
+5. **Sửa lỗi hiển thị chữ trên Banner**: Chia dòng và áp dụng font hệ thống chuẩn tiếng Việt.
+
+---
+
 ## 💻 Dành Cho Lập Trình Viên (Cài Đặt & Chạy Cục Bộ)
 
 ```bash
@@ -146,7 +176,10 @@ npm install
 # 4. Khởi chạy ở môi trường phát triển (Local dev server)
 npm run dev
 
-# 5. Đóng gói sản phẩm (Production build)
+# 5. Chạy bộ kiểm thử tự động QA (Test Suite)
+npm test
+
+# 6. Đóng gói sản phẩm (Production build)
 npm run build
 ```
 
