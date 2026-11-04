@@ -2,12 +2,13 @@ import { ShiftRecord, AppSettings } from '../types';
 
 const RECORDS_STORAGE_KEY = 'phongdriver_pay_records';
 const SETTINGS_STORAGE_KEY = 'phongdriver_pay_settings';
+const INITIALIZED_KEY = 'phongdriver_initialized_v2';
 
 export const DEFAULT_SETTINGS: AppSettings = {
   driverName: 'Phong Grab Pro',
   vehicleType: 'GrabBike',
   dailyTarget: 500000, // Mục tiêu thu nhập ròng 500k/ngày
-  theme: 'light',
+  theme: 'dark',
 };
 
 // Hàm định dạng ngày thành YYYY-MM-DD
@@ -31,6 +32,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 650000,
       bonus: 80000,
       tips: 45000,
+      tax: 9750,
       petrol: 85000,
       meals: 55000,
       maint: 0,
@@ -46,6 +48,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 760000,
       bonus: 110000,
       tips: 60000,
+      tax: 11400,
       petrol: 95000,
       meals: 65000,
       maint: 125000,
@@ -61,6 +64,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 540000,
       bonus: 50000,
       tips: 35000,
+      tax: 8100,
       petrol: 70000,
       meals: 50000,
       maint: 0,
@@ -76,6 +80,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 890000,
       bonus: 140000,
       tips: 75000,
+      tax: 13350,
       petrol: 110000,
       meals: 70000,
       maint: 0,
@@ -91,6 +96,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 610000,
       bonus: 70000,
       tips: 40000,
+      tax: 9150,
       petrol: 80000,
       meals: 55000,
       maint: 0,
@@ -106,6 +112,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 460000,
       bonus: 40000,
       tips: 25000,
+      tax: 6900,
       petrol: 60000,
       meals: 40000,
       maint: 0,
@@ -121,6 +128,7 @@ export function generateMockRecords(): ShiftRecord[] {
       fare: 680000,
       bonus: 90000,
       tips: 50000,
+      tax: 10200,
       petrol: 90000,
       meals: 60000,
       maint: 0,
@@ -149,6 +157,9 @@ export function generateMockRecords(): ShiftRecord[] {
         appFare: t.fare,
         bonus: t.bonus,
         tips: t.tips,
+        taxAmount: t.tax,
+        platformFee: 0,
+        isFareNet: true,
       },
       expenses: {
         petrol: t.petrol,
@@ -167,25 +178,26 @@ export function generateMockRecords(): ShiftRecord[] {
   return records;
 }
 
-// Lấy danh sách bản ghi từ localStorage (nếu chưa có thì nạp mock data)
+// Lấy danh sách bản ghi từ localStorage (Tuyệt đối KHÔNG tự ý nạp lại mock data nếu người dùng đã xóa)
 export function getSavedRecords(): ShiftRecord[] {
   try {
+    const isInitialized = localStorage.getItem(INITIALIZED_KEY);
     const raw = localStorage.getItem(RECORDS_STORAGE_KEY);
-    if (!raw) {
+
+    // Nếu người dùng chưa từng khởi chạy app LẦN NÀO:
+    if (!isInitialized && !raw) {
+      localStorage.setItem(INITIALIZED_KEY, 'true');
       const initialMock = generateMockRecords();
       saveRecords(initialMock);
       return initialMock;
     }
+
+    if (!raw) return [];
     const parsed = JSON.parse(raw);
-    if (!Array.isArray(parsed) || parsed.length === 0) {
-      const initialMock = generateMockRecords();
-      saveRecords(initialMock);
-      return initialMock;
-    }
-    return parsed;
+    return Array.isArray(parsed) ? parsed : [];
   } catch (error) {
     console.error('Lỗi khi đọc dữ liệu từ LocalStorage:', error);
-    return generateMockRecords();
+    return [];
   }
 }
 
@@ -199,8 +211,9 @@ export function saveRecords(records: ShiftRecord[]): void {
 }
 
 // Thêm hoặc cập nhật bản ghi
-export function upsertRecord(record: ShiftRecord): ShiftRecord[] {
-  const records = getSavedRecords();
+export function upsertRecord(record: ShiftRecord, currentRecords?: ShiftRecord[]): ShiftRecord[] {
+  // Ưu tiên dùng state hiện tại trong App để tránh đọc lại hoặc nạp sai
+  const records = currentRecords ? [...currentRecords] : getSavedRecords();
   const index = records.findIndex((r) => r.id === record.id || r.date === record.date);
 
   if (index >= 0) {
@@ -221,26 +234,29 @@ export function upsertRecord(record: ShiftRecord): ShiftRecord[] {
   // Sắp xếp ngày giảm dần
   records.sort((a, b) => b.date.localeCompare(a.date));
   saveRecords(records);
+  localStorage.setItem(INITIALIZED_KEY, 'true');
   return records;
 }
 
 // Xóa bản ghi theo ID
-export function deleteRecord(id: string): ShiftRecord[] {
-  const records = getSavedRecords();
+export function deleteRecord(id: string, currentRecords?: ShiftRecord[]): ShiftRecord[] {
+  const records = currentRecords ? [...currentRecords] : getSavedRecords();
   const updated = records.filter((r) => r.id !== id);
   saveRecords(updated);
   return updated;
 }
 
-// Đặt lại dữ liệu mẫu
+// Đặt lại dữ liệu mẫu (Chỉ khi người dùng chủ động bấm trong Cài đặt)
 export function resetToMockData(): ShiftRecord[] {
+  localStorage.setItem(INITIALIZED_KEY, 'true');
   const mock = generateMockRecords();
   saveRecords(mock);
   return mock;
 }
 
-// Xóa toàn bộ dữ liệu
+// Xóa toàn bộ dữ liệu (Giữ nguyên trạng thái trống, không bao giờ tự động nạp lại mẫu)
 export function clearAllRecords(): ShiftRecord[] {
+  localStorage.setItem(INITIALIZED_KEY, 'true');
   saveRecords([]);
   return [];
 }

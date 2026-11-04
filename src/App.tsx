@@ -173,14 +173,14 @@ export const App: React.FC = () => {
 
   // Hành động thêm/sửa ca chạy
   const handleSaveShift = (record: ShiftRecord) => {
-    const updated = upsertRecord(record);
+    const updated = upsertRecord(record, records);
     setRecords(updated);
     showToast('Đã lưu dữ liệu ca chạy thành công!');
   };
 
   // Hành động xóa ca chạy
   const handleDeleteShift = (id: string) => {
-    const updated = deleteRecord(id);
+    const updated = deleteRecord(id, records);
     setRecords(updated);
     showToast('Đã xóa ca chạy thành công.');
   };
