@@ -56,9 +56,21 @@ export const App: React.FC = () => {
   // Danh sách bản ghi ca chạy
   const [records, setRecords] = useState<ShiftRecord[]>(getSavedRecords);
 
-  // Ngày hôm nay
+  // Ngày hôm nay & Ngày đang chọn để xem / nhập liệu
   const today = useMemo(() => new Date(), []);
   const todayStr = useMemo(() => formatDate(today), [today]);
+  const [selectedDate, setSelectedDate] = useState<string>(todayStr);
+
+  const handleSelectDate = (date: string) => {
+    setSelectedDate(date);
+    if (date === todayStr) {
+      setPeriod('today');
+    } else {
+      setPeriod('custom');
+      setCustomStartDate(date);
+      setCustomEndDate(date);
+    }
+  };
 
   // Bộ lọc thời gian
   const [period, setPeriod] = useState<FilterPeriod>('this_week');
@@ -231,6 +243,8 @@ export const App: React.FC = () => {
         onToggleTheme={toggleTheme}
         onOpenSettings={() => setIsSettingsOpen(true)}
         onOpenNewShift={handleOpenNewShift}
+        selectedDate={selectedDate}
+        onSelectDate={handleSelectDate}
         todayStr={todayStr}
       />
 
@@ -254,7 +268,7 @@ export const App: React.FC = () => {
             setCustomStartDate(start);
             setCustomEndDate(end);
           }}
-          todayStr={todayStr}
+          todayStr={selectedDate}
         />
 
         {/* NỘI DUNG THEO TAB TRÊN MOBILE HOẶC TOÀN BỘ TRÊN DESKTOP */}
@@ -313,7 +327,7 @@ export const App: React.FC = () => {
         onClose={() => setIsShiftModalOpen(false)}
         onSave={handleSaveShift}
         initialRecord={editingRecord}
-        todayStr={todayStr}
+        todayStr={selectedDate}
       />
 
       {/* MODAL CÀI ĐẶT & SAO LƯU */}
