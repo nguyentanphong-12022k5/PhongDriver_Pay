@@ -1,36 +1,12 @@
 import React from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-  ChartOptions,
-} from 'chart.js';
+import { Chart as ChartJS, registerables, ChartOptions } from 'chart.js';
 import { Bar, Doughnut } from 'react-chartjs-2';
 import { ShiftRecord } from '../types';
 import { calculateShift, formatCurrency, formatNumber } from '../utils/calculations';
 import { TrendingUp, PieChart, BarChart3, AlertCircle } from 'lucide-react';
 
-// Đăng ký các module ChartJS
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  PointElement,
-  LineElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
+// Đăng ký toàn bộ các module, controllers (Bar, Line, Doughnut) của ChartJS
+ChartJS.register(...registerables);
 
 interface ChartsViewProps {
   records: ShiftRecord[];

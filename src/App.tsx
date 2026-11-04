@@ -17,6 +17,7 @@ import { Navbar } from './components/Navbar';
 import { FilterBar } from './components/FilterBar';
 import { KpiCards } from './components/KpiCards';
 import { ChartsView } from './components/ChartsView';
+import { ErrorBoundary } from './components/ErrorBoundary';
 import { HistoryTable } from './components/HistoryTable';
 import { ShiftFormModal } from './components/ShiftFormModal';
 import { SettingsModal } from './components/SettingsModal';
@@ -268,7 +269,9 @@ export const App: React.FC = () => {
 
         {/* 2. BIỂU ĐỒ TRỰC QUAN (CHARTS) */}
         <div className={`space-y-5 ${mobileTab !== 'charts' && mobileTab !== 'dashboard' ? 'hidden sm:block' : ''} ${mobileTab === 'charts' ? 'block' : 'hidden lg:block'}`}>
-          <ChartsView records={filteredRecords} isDark={isDark} />
+          <ErrorBoundary fallbackTitle="Biểu đồ xu hướng & cơ cấu chi phí">
+            <ChartsView records={filteredRecords} isDark={isDark} />
+          </ErrorBoundary>
         </div>
 
         {/* 3. BẢNG LỊCH SỬ & QUẢN LÝ CA CHẠY */}
