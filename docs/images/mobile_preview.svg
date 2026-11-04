@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 860" width="100%" height="auto">
+  <defs>
+    <filter id="phoneShadow" x="-10%" y="-5%" width="120%" height="110%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.3" />
+    </filter>
+    <linearGradient id="grabGreenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00B14F" />
+      <stop offset="100%" stop-color="#008239" />
+    </linearGradient>
+  </defs>
+
+  <!-- Phone Bezel / Chassis -->
+  <rect x="10" y="10" width="400" height="840" rx="46" fill="#1e293b" stroke="#334155" stroke-width="4" filter="url(#phoneShadow)" />
+  <!-- Inner Screen -->
+  <rect x="22" y="22" width="376" height="816" rx="38" fill="#f8fafc" />
+
+  <!-- Dynamic Island / Speaker Notch -->
+  <rect x="150" y="32" width="120" height="26" rx="13" fill="#0f172a" />
+  <circle cx="245" cy="45" r="5" fill="#1e293b" />
+
+  <!-- App Header -->
+  <g transform="translate(36, 75)">
+    <rect width="36" height="36" rx="10" fill="#00B14F" />
+    <text x="18" y="24" font-size="20" text-anchor="middle" dominant-baseline="central">🛵</text>
+    <text x="46" y="24" font-family="sans-serif" font-size="17" font-weight="900" fill="#0f172a">PhongDriver<tspan fill="#00B14F">Pay</tspan></text>
+    <text x="345" y="24" font-size="20" text-anchor="end">⚙️</text>
+  </g>
+
+  <!-- Lunar Date Pill Bar -->
+  <g transform="translate(36, 125)">
+    <rect width="348" height="34" rx="10" fill="#ecfdf5" stroke="#a7f3d0" />
+    <text x="15" y="22" font-size="14">🌕</text>
+    <text x="36" y="22" font-family="sans-serif" font-size="12" font-weight="700" fill="#065f46">25/9 ÂL (Ất Tỵ) • Hôm nay</text>
+    <rect x="250" y="7" width="85" height="20" rx="6" fill="#00B14F" />
+    <text x="292" y="21" font-family="sans-serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle">TUẦN NÀY</text>
+  </g>
+
+  <!-- Target Progress Card -->
+  <g transform="translate(36, 172)">
+    <rect width="348" height="85" rx="16" fill="url(#grabGreenGrad)" />
+    <text x="18" y="26" font-family="sans-serif" font-size="11" font-weight="700" fill="#d1fae5">🎯 MỤC TIÊU NGÀY (500.000 ₫)</text>
+    <text x="18" y="55" font-family="sans-serif" font-size="22" font-weight="900" fill="#ffffff">615.000 ₫</text>
+    <text x="330" y="55" font-family="sans-serif" font-size="14" font-weight="800" fill="#fef08a" text-anchor="end">123% 🎉</text>
+    <!-- Progress bar -->
+    <rect x="18" y="66" width="312" height="6" rx="3" fill="#064e3b" />
+    <rect x="18" y="66" width="312" height="6" rx="3" fill="#facc15" />
+  </g>
+
+  <!-- Main KPI Summary Grid -->
+  <g transform="translate(36, 270)">
+    <!-- Gross & Expenses -->
+    <rect x="0" y="0" width="168" height="70" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="14" y="24" font-family="sans-serif" font-size="10" font-weight="700" fill="#64748b">THU GỘP [1]</text>
+    <text x="14" y="50" font-family="sans-serif" font-size="16" font-weight="900" fill="#0f172a">775.000 ₫</text>
+
+    <rect x="180" y="0" width="168" height="70" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="194" y="24" font-family="sans-serif" font-size="10" font-weight="700" fill="#e11d48">TỔNG CHI [2]</text>
+    <text x="194" y="50" font-family="sans-serif" font-size="16" font-weight="900" fill="#e11d48">160.000 ₫</text>
+
+    <!-- Net Income (Hero Card) -->
+    <rect x="0" y="80" width="348" height="85" rx="14" fill="#ecfdf5" stroke="#00B14F" stroke-width="2" />
+    <text x="16" y="105" font-family="sans-serif" font-size="11" font-weight="800" fill="#065f46">★ [3] LÃI RÒNG ĐÚT TÚI HÔM NAY</text>
+    <text x="16" y="142" font-family="sans-serif" font-size="28" font-weight="900" fill="#00B14F">615.000 ₫</text>
+    <text x="330" y="142" font-family="sans-serif" font-size="11" font-weight="600" fill="#047857" text-anchor="end">8.5h • 18 cuốc</text>
+
+    <!-- Savings & Cash -->
+    <rect x="0" y="175" width="168" height="65" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="14" y="197" font-family="sans-serif" font-size="10" font-weight="700" fill="#d97706">TIẾT KIỆM [4]</text>
+    <text x="14" y="224" font-family="sans-serif" font-size="15" font-weight="900" fill="#d97706">100.000 ₫</text>
+
+    <rect x="180" y="175" width="168" height="65" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="194" y="197" font-family="sans-serif" font-size="10" font-weight="700" fill="#4f46e5">TIỀN MẶT CÒN [5]</text>
+    <text x="194" y="224" font-family="sans-serif" font-size="15" font-weight="900" fill="#4f46e5">515.000 ₫</text>
+  </g>
+
+  <!-- Recent Shifts Mobile Cards List -->
+  <g transform="translate(36, 530)">
+    <text x="0" y="16" font-family="sans-serif" font-size="13" font-weight="800" fill="#1e293b">LỊCH SỬ GẦN ĐÂY</text>
+
+    <!-- Shift Card 1 -->
+    <rect x="0" y="28" width="348" height="90" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="14" y="52" font-family="sans-serif" font-size="13" font-weight="800" fill="#0f172a">Hôm qua (03/11/2026)</text>
+    <text x="14" y="72" font-family="sans-serif" font-size="11" fill="#64748b">9.0h online • 21 cuốc • 135 km</text>
+    <text x="14" y="100" font-family="sans-serif" font-size="11" fill="#d97706">Cất heo: 100.000 ₫</text>
+    <text x="334" y="60" font-family="sans-serif" font-size="18" font-weight="900" fill="#00B14F" text-anchor="end">+645.000 ₫</text>
+    <text x="334" y="98" font-family="sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">Xăng 95k • Nhớt 125k</text>
+
+    <!-- Shift Card 2 -->
+    <rect x="0" y="128" width="348" height="75" rx="14" fill="#ffffff" stroke="#e2e8f0" />
+    <text x="14" y="152" font-family="sans-serif" font-size="13" font-weight="800" fill="#0f172a">02/11/2026</text>
+    <text x="14" y="172" font-family="sans-serif" font-size="11" fill="#64748b">7.5h online • 16 cuốc • 98 km</text>
+    <text x="334" y="160" font-family="sans-serif" font-size="18" font-weight="900" fill="#00B14F" text-anchor="end">+475.000 ₫</text>
+  </g>
+
+  <!-- Sticky Bottom Navigation Bar -->
+  <g transform="translate(22, 755)">
+    <rect width="376" height="83" rx="0" fill="#ffffff" stroke="#cbd5e1" stroke-width="1" />
+    <!-- Tabs -->
+    <text x="50" y="42" font-size="18" text-anchor="middle">📊</text>
+    <text x="50" y="58" font-family="sans-serif" font-size="10" font-weight="700" fill="#00B14F" text-anchor="middle">Tổng Quan</text>
+
+    <text x="120" y="42" font-size="18" text-anchor="middle">📜</text>
+    <text x="120" y="58" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">Lịch Sử</text>
+
+    <!-- Floating Center (+) Button -->
+    <g transform="translate(188, 10)">
+      <circle cx="0" cy="18" r="28" fill="#00B14F" filter="url(#phoneShadow)" stroke="#ffffff" stroke-width="3" />
+      <text x="0" y="27" font-family="sans-serif" font-size="30" font-weight="900" fill="#ffffff" text-anchor="middle">+</text>
+      <text x="0" y="56" font-family="sans-serif" font-size="10" font-weight="800" fill="#00B14F" text-anchor="middle">Nhập Ca</text>
+    </g>
+
+    <text x="256" y="42" font-size="18" text-anchor="middle">📈</text>
+    <text x="256" y="58" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">Biểu Đồ</text>
+
+    <text x="326" y="42" font-size="18" text-anchor="middle">⚙️</text>
+    <text x="326" y="58" font-family="sans-serif" font-size="10" font-weight="600" fill="#64748b" text-anchor="middle">Cài Đặt</text>
+  </g>
+
+  <!-- Home Indicator Bar -->
+  <rect x="145" y="825" width="130" height="4" rx="2" fill="#0f172a" />
+</svg>
